@@ -19,3 +19,30 @@ function solveEquation(a, b, c) {
 
     return arr;
 }
+
+function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+
+  //Преобразование типов к числу
+    percent = parseInt(percent);// процентная ставка
+    contribution = parseInt(contribution);//сумма перв.взноса
+    amount = parseInt(amount);//сумма кредита
+    countMonths = parseInt(countMonths);//срок кредита в мес.
+  
+    if ((percent < 0 || contribution < 0 || amount < 0 || countMonths < 0) || (isNaN(percent) === true || isNaN(contribution) === true || isNaN(amount) === true || isNaN(countMonths) === true)) {
+      return 'Ошибка. Данные введены некорректно.';
+    } else {
+    let S = amount - contribution; //тело кредита
+    let P = percent/(12*100);// преобр. год.ставки в мес.
+    let n = countMonths;
+  //ежемесячный платеж
+    let monthlyPayment = S * (P + (P / ((1 + P)**n) - 1));
+    let totalPayment = (monthlyPayment * n).toFixed(2);
+    
+    console.log(totalPayment);
+  
+    return totalPayment;
+      
+  }
+
+
+}
